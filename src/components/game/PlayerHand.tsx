@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { socket } from "../../lib/socket";
-import { usePlayerStore } from "../../store/usePlayerStore";
-import { useRoomIdStore } from "../../store/useRoomIdStore";
+import { socket } from "@/lib/socket";
+import { usePlayerStore } from "@/store/usePlayerStore";
+import { useRoomIdStore } from "@/store/useRoomIdStore";
 import {
   type Card,
   type CardColor,
   type ClientPlayer,
   type WildCard,
-} from "../../types";
-import ColorPicker from "./ColorPicker";
-import PlayerSelector from "./PlayerSelector";
+} from "@/types";
+import ColorPicker from "@/components/game/ColorPicker";
+import PlayerSelector from "@/components/game/PlayerSelector";
 
 const PlayerHand = () => {
   const { roomId } = useRoomIdStore();

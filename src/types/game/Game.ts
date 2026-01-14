@@ -1,5 +1,5 @@
-import type { Card } from "./Card";
-import type { ClientPlayer, Player } from "./Player";
+import type { Card } from "@/types/game/Card";
+import type { ClientPlayer, Player } from "@/types/game/Player";
 
 export type GamePhase = "waiting" | "playing" | "finished";
 

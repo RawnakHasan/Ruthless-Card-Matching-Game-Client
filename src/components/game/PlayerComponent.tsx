@@ -1,7 +1,7 @@
 import { Crown } from "lucide-react";
-import UserAvatar from "../UserAvatar";
-import { useUsernameStore } from "../../store/useUsernameStore";
-import { ClientPlayer } from "../../types";
+import UserAvatar from "@/components/UserAvatar";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { ClientPlayer } from "@/types";
 
 const PlayerComponent = ({ player }: { player: ClientPlayer }) => {
   const { username } = useUsernameStore();

@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUsernameStore } from "../store/useUsernameStore";
-import { PrimaryButton } from "./ui/Button";
-import { Input } from "./ui/Input";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { PrimaryButton } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 
 const usernameSchema = z.object({
   username: z

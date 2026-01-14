@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useUsernameStore } from "../store/useUsernameStore";
-import UserAvatar from "./UserAvatar";
-import { AppDialog } from "./ui/Dialog";
-import { DestructiveButton } from "./ui/Button";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import UserAvatar from "@/components/UserAvatar";
+import { AppDialog } from "@/components/ui/Dialog";
+import { DestructiveButton } from "@/components/ui/Button";
 
 const UserComponent = () => {
   const [open, setOpen] = useState(false);

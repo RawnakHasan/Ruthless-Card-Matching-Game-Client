@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import type { Card, CardColor, NormalCard } from "../types";
+import type { Card, CardColor, NormalCard } from "@/types";
 
 export const generateDeck = (): Card[] => {
   const Deck: Card[] = [];

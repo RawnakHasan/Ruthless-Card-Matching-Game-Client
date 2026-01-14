@@ -1,5 +1,5 @@
-import Chat from "../Chat";
-import PlayersList from "./PlayersList";
+import Chat from "@/components/Chat";
+import PlayersList from "@/components/game/PlayersList";
 
 const Sidebar = () => {
   return (

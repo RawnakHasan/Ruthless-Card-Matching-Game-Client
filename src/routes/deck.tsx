@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { generateDeck } from "../lib/generateDeck";
+import { generateDeck } from "@/lib/generateDeck";
 
 export const Route = createFileRoute("/deck")({
   component: RouteComponent,

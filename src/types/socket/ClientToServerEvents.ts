@@ -1,4 +1,4 @@
-import type { Card } from "../game";
+import type { Card } from "@/types/game";
 
 export interface ClientToServerEvents {
   createGame: ({ username }: { username: string }) => void;

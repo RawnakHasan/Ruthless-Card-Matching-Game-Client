@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ClientGame } from "../types";
+import { ClientGame } from "@/types";
 
 interface GameStore extends ClientGame {
   setGameState: (game: ClientGame) => void;

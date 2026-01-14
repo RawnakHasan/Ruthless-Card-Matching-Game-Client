@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { socket } from "../lib/socket";
-import { useUsernameStore } from "../store/useUsernameStore";
-import { PrimaryButton } from "./ui/Button";
-import { Input } from "./ui/Input";
+import { socket } from "@/lib/socket";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { PrimaryButton } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { useForm } from "react-hook-form";

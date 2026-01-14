@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useUsernameStore } from "../store/useUsernameStore";
-import { UsernameForm } from "../components/UsernameForm";
-import UserComponent from "../components/UserComponent";
-import GameCreation from "../components/GameCreation";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { UsernameForm } from "@/components/UsernameForm";
+import UserComponent from "@/components/UserComponent";
+import GameCreation from "@/components/GameCreation";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,

@@ -1,2 +1,2 @@
-export * from "./game";
-export * from "./socket";
+export * from "@/types/game";
+export * from "@/types/socket";

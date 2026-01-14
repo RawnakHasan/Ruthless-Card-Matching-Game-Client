@@ -1,5 +1,5 @@
-import type { ClientGame, Player } from "../game";
-import type { Message } from "../Message";
+import type { ClientGame, Player } from "@/types/game";
+import type { Message } from "@/types/Message";
 
 export interface ServerToClientEvents {
   gameCreated: ({ roomId }: { roomId: string }) => void;

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { socket } from "../lib/socket";
-import { useUsernameStore } from "../store/useUsernameStore";
-import { Input } from "./ui/Input";
-import { useRoomIdStore } from "../store/useRoomIdStore";
-import { Message } from "../types/Message";
+import { socket } from "@/lib/socket";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { Input } from "@/components/ui/Input";
+import { useRoomIdStore } from "@/store/useRoomIdStore";
+import { Message } from "@/types/Message";
 
 function Chat() {
   const { username } = useUsernameStore();

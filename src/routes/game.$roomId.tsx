@@ -1,12 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { socket } from "../lib/socket";
-import { useRoomIdStore } from "../store/useRoomIdStore";
-import Sidebar from "../components/game/Sidebar";
-import GameBoard from "../components/game/GameBoard";
-import { useGameStore } from "../store/useGameStore";
-import { usePlayerStore } from "../store/usePlayerStore";
-import { useUsernameStore } from "../store/useUsernameStore";
+import { socket } from "@/lib/socket";
+import { useRoomIdStore } from "@/store/useRoomIdStore";
+import Sidebar from "@/components/game/Sidebar";
+import GameBoard from "@/components/game/GameBoard";
+import { useGameStore } from "@/store/useGameStore";
+import { usePlayerStore } from "@/store/usePlayerStore";
+import { useUsernameStore } from "@/store/useUsernameStore";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/game/$roomId")({

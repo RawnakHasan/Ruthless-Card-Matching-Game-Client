@@ -1,5 +1,5 @@
-import { useDiscardPile } from "../../hooks/gameSelectors";
-import { Card } from "../../types";
+import { useDiscardPile } from "@/hooks/gameSelectors";
+import { Card } from "@/types";
 
 function rotationFromCard(card: Card) {
   const str = card.id ?? "";

@@ -4,15 +4,15 @@ import {
   useGamePhase,
   useHostSocketId,
   usePlayers,
-} from "../../hooks/gameSelectors";
-import { PrimaryButton } from "../ui/Button";
-import PlayerComponent from "./PlayerComponent";
-import PlayerHand from "./PlayerHand";
-import DiscardPile from "./DiscardPile";
-import { useRoomIdStore } from "../../store/useRoomIdStore";
+} from "@/hooks/gameSelectors";
+import { PrimaryButton } from "@/components/ui/Button";
+import PlayerComponent from "@/components/game/PlayerComponent";
+import PlayerHand from "@/components/game/PlayerHand";
+import DiscardPile from "@/components/game/DiscardPile";
+import { useRoomIdStore } from "@/store/useRoomIdStore";
 import { useState } from "react";
-import { socket } from "../../lib/socket";
-import { usePlayerStore } from "../../store/usePlayerStore";
+import { socket } from "@/lib/socket";
+import { usePlayerStore } from "@/store/usePlayerStore";
 
 const GameBoard = () => {
   const gamePhase = useGamePhase();

@@ -1,8 +1,8 @@
-import { DestructiveButton } from "../ui/Button";
-import { usePlayers } from "../../hooks/gameSelectors";
-import UserAvatar from "../UserAvatar";
-import { useUsernameStore } from "../../store/useUsernameStore";
-import { ClientPlayer } from "../../types";
+import { DestructiveButton } from "@/components/ui/Button";
+import { usePlayers } from "@/hooks/gameSelectors";
+import UserAvatar from "@/components/UserAvatar";
+import { useUsernameStore } from "@/store/useUsernameStore";
+import { ClientPlayer } from "@/types";
 
 type PlayerSelectorProps = {
   handlePlayerSelection: (player: ClientPlayer) => void;

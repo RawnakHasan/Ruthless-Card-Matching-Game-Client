@@ -1,5 +1,5 @@
-import { CardColor } from "../../types";
-import { DestructiveButton } from "../ui/Button";
+import { CardColor } from "@/types";
+import { DestructiveButton } from "@/components/ui/Button";
 
 interface ColorPickerProps {
   onColorSelect: (color: CardColor) => void;

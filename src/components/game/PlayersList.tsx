@@ -1,5 +1,5 @@
-import { usePlayers } from "../../hooks/gameSelectors";
-import PlayerComponent from "./PlayerComponent";
+import { usePlayers } from "@/hooks/gameSelectors";
+import PlayerComponent from "@/components/game/PlayerComponent";
 
 const PlayersList = () => {
   const playersList = usePlayers();
