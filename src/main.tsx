@@ -27,7 +27,7 @@ if (!rootElement) {
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <div className="isolate">
+    <div className="isolate antialiased">
       <RouterProvider router={router} />
     </div>
   );

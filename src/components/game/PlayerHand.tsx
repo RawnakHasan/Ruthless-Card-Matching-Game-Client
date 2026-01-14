@@ -78,16 +78,19 @@ const PlayerHand = () => {
 
   return (
     <>
-      <div className="w-full overflow-x-auto p-2">
-        <div className="grid grid-rows-2 grid-flow-col auto-cols-max gap-4 px-4">
+      <div
+        className="w-full flex sm:items-center sm:justify-center overflow-x-auto overflow-y-visible py-4"
+        style={myHand.length <= 9 ? { justifyContent: "center" } : {}}
+      >
+        <div className="grid grid-rows-3 grid-flow-col auto-cols-max gap-4 overflow-visible">
           {myHand.map((card) => (
             <img
-              onClick={() => handleCardClick(card)}
               key={card.id}
               src={card.image}
               alt={card.id}
-              className="w-16 active:scale-95 transition cursor-pointer hover:scale-110 hover:brightness-110"
+              onClick={() => handleCardClick(card)}
               draggable={false}
+              className="w-16 cursor-pointer transition hover:scale-110 hover:brightness-110 active:scale-95"
             />
           ))}
         </div>

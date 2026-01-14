@@ -4,6 +4,7 @@ import { useUsernameStore } from "@/store/useUsernameStore";
 import { Input } from "@/components/ui/Input";
 import { useRoomIdStore } from "@/store/useRoomIdStore";
 import { Message } from "@/types/Message";
+import { PrimaryButton } from "@/components/ui/Button";
 
 function Chat() {
   const { username } = useUsernameStore();
@@ -42,7 +43,7 @@ function Chat() {
   };
 
   return (
-    <div className="h-1/2 flex flex-col justify-between min-h-0">
+    <div className="h-1/2 flex flex-col gap-4 justify-between min-h-0">
       <div className="flex flex-col gap-0.5 overflow-y-auto min-h-0">
         {messages.map((msg) => (
           <div className="border-b min-w-0" key={msg.timestamp}>
@@ -61,6 +62,7 @@ function Chat() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
         />
+        <PrimaryButton className="sm:hidden">Send</PrimaryButton>
       </div>
     </div>
   );

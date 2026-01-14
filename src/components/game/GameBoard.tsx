@@ -1,4 +1,4 @@
-import { CopyCheck, Play } from "lucide-react";
+import { CopyCheck, Play, Timer } from "lucide-react";
 import {
   useCurrentTurn,
   useGamePhase,
@@ -13,6 +13,10 @@ import { useRoomIdStore } from "@/store/useRoomIdStore";
 import { useState } from "react";
 import { socket } from "@/lib/socket";
 import { usePlayerStore } from "@/store/usePlayerStore";
+import { List, MessageCircleMore } from "lucide-react";
+import PlayersList from "@/components/game/PlayersList";
+import { AppDialog } from "@/components/ui/Dialog";
+import Chat from "@/components/Chat";
 
 const GameBoard = () => {
   const gamePhase = useGamePhase();
@@ -25,9 +29,12 @@ const GameBoard = () => {
   const hostSocketId = useHostSocketId();
   const amIHost = mySocketId === hostSocketId;
 
+  const [openPlayersList, setOpenPlayersList] = useState<boolean>(false);
+  const [openChat, setOpenChat] = useState<boolean>(false);
+
   return (
-    <div className="h-full w-5/6 flex flex-col items-center">
-      <div className="h-1/8 w-full p-4 flex justify-between items-center">
+    <div className="h-full w-full flex flex-col items-center sm:gap-0 gap-3">
+      <div className="h-1/8 w-full sm:p-4 flex justify-between items-center">
         {amIHost && (
           <PrimaryButton
             onClick={() => socket.emit("startGame", { roomId })}
@@ -35,6 +42,12 @@ const GameBoard = () => {
           >
             <Play />
           </PrimaryButton>
+        )}
+        {gamePhase === "playing" && (
+          <p className="flex p-2 rounded-full items-center justify-center bg-blue-500">
+            <Timer size={32} />
+            00:20
+          </p>
         )}
         {gamePhase !== "playing" && (
           <span
@@ -55,12 +68,12 @@ const GameBoard = () => {
             )}
           </span>
         )}
-        <div className="border-2 border-text rounded-full p-2 pr-4 bg-background">
+        <div className="border-2 border-text rounded-full p-2 bg-background">
           {currentPlayer && <PlayerComponent player={currentPlayer} />}
         </div>
       </div>
       <div className="border w-full" />
-      <div className="h-4/8 w-full p-2 flex items-center justify-center relative">
+      <div className="sm:h-4/8 min-h-60 w-full sm:p-2 flex items-center justify-center relative">
         <DiscardPile />
         {gamePhase === "playing" && (
           <img
@@ -74,9 +87,32 @@ const GameBoard = () => {
         )}
       </div>
       <div className="border w-full" />
-      <div className="h-3/8 w-full p-2 flex items-center justify-center border-b-2">
+      <div className="h-3/8 w-full pb-2 sm:p-2 flex items-center justify-center border-b-2">
         {gamePhase === "waiting" ? "No Cards has been Dealt" : <PlayerHand />}
         {gamePhase === "finished" && "Show Leaderboard"}
+      </div>
+      <div className="flex items-center justify-evenly w-full">
+        <div
+          onClick={() => setOpenPlayersList(true)}
+          className="active:scale-95 transition sm:hidden bg-primary bottom-8 right-8 flex items-center justify-center aspect-square rounded-full size-16"
+        >
+          <List size={32} />
+        </div>
+        <div className="active:scale-95 transition sm:hidden bg-primary size-16 flex items-center justify-center text-xl p-2 font-semibold aspect-square rounded-full">
+          UNO
+        </div>
+        <div
+          onClick={() => setOpenChat(true)}
+          className="active:scale-95 transition sm:hidden bg-primary bottom-8 left-8 flex items-center justify-center aspect-square rounded-full size-16"
+        >
+          <MessageCircleMore size={32} />
+        </div>
+        <AppDialog onOpenChange={setOpenPlayersList} open={openPlayersList}>
+          <PlayersList />
+        </AppDialog>
+        <AppDialog title="Messages" onOpenChange={setOpenChat} open={openChat}>
+          <Chat />
+        </AppDialog>
       </div>
     </div>
   );

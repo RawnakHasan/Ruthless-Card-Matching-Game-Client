@@ -61,14 +61,14 @@ const GameCreation = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-8">
+    <div className="flex flex-col w-full gap-4 items-center justify-center">
+      <div className="flex sm:flex-row flex-col sm:gap-8 gap-3">
         <PrimaryButton onClick={handleCreateGame}>Create Room</PrimaryButton>
         <div className="border" />
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           id="roomId-form"
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-4"
         >
           <Input
             {...form.register("roomId", {

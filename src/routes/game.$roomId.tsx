@@ -59,9 +59,11 @@ function RouteComponent() {
   });
 
   return (
-    <div className="h-screen flex p-4">
-      <Sidebar />
-      <div className="border mx-4" />
+    <div className="min-h-screen min-w-screen relative flex p-4 justify-center">
+      <div className="hidden sm:flex flex-col items-center justify-between">
+        <Sidebar />
+      </div>
+      <div className="hidden sm:inline border mx-4" />
       <GameBoard />
     </div>
   );

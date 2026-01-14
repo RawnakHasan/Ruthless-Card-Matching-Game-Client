@@ -13,7 +13,7 @@ export const PrimaryButton = ({
   ...props
 }: ButtonProps) => {
   return (
-    <button className={`bg-primary ${universalStyle} ${className}`} {...props}>
+    <button className={`bg-primary ${className} ${universalStyle}`} {...props}>
       {children}
     </button>
   );
@@ -25,7 +25,7 @@ export const DestructiveButton = ({
   ...props
 }: ButtonProps) => {
   return (
-    <button className={`bg-error ${universalStyle} ${className}`} {...props}>
+    <button className={`bg-error ${className} ${universalStyle}`} {...props}>
       {children}
     </button>
   );
