@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #4d40e3;
+  --secondary: #41ae87;
+  --card-red: #ff5555;
+  --card-blue: #5555ff;
+  --card-green: #55aa55;
+  --card-yellow: #ffaa00;
+  --background: #f5fefd;
+  --text: #030104;
+  --error: #d21404;
+  --gold: #ffbf00;
+  --silver: #c4c4c4;
+  --bronze: #ce8946;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-card-red: var(--card-red);
+  --color-card-blue: var(--card-blue);
+  --color-card-green: var(--card-green);
+  --color-card-yellow: var(--card-yellow);
+  --color-background: var(--background);
+  --color-text: var(--text);
+  --color-error: var(--error);
+  --color-gold: var(--gold);
+  --color-silver: var(--silver);
+  --color-bronze: var(--bronze);
+}
+
+html {
+  @apply bg-background text-text;
+}
