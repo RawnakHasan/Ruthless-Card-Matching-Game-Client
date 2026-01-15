@@ -7,6 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, Gamepad2 } from "lucide-react";
 
 const roomIdForm = z.object({
   roomId: z
@@ -63,7 +64,9 @@ const GameCreation = () => {
   return (
     <div className="flex flex-col w-full gap-4 items-center justify-center">
       <div className="flex sm:flex-row flex-col sm:gap-8 gap-3">
-        <PrimaryButton onClick={handleCreateGame}>Create Room</PrimaryButton>
+        <PrimaryButton icon={<Gamepad2 />} onClick={handleCreateGame}>
+          Create Room
+        </PrimaryButton>
         <div className="border" />
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -77,7 +80,7 @@ const GameCreation = () => {
             placeholder="Enter Room Code"
             className="focus:bg-violet-500"
           />
-          <PrimaryButton type="submit" form="roomId-form">
+          <PrimaryButton icon={<ArrowRight />} type="submit" form="roomId-form">
             Enter Room
           </PrimaryButton>
         </form>

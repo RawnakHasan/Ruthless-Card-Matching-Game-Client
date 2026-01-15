@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useUsernameStore } from "@/store/useUsernameStore";
 import { PrimaryButton } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Save } from "lucide-react";
 
 const usernameSchema = z.object({
   username: z
@@ -56,7 +57,7 @@ export function UsernameForm() {
       )}
 
       <div style={{ display: "flex", gap: "0.5rem" }}>
-        <PrimaryButton type="submit" disabled={isSubmitting}>
+        <PrimaryButton icon={<Save />} type="submit" disabled={isSubmitting}>
           Save
         </PrimaryButton>
       </div>

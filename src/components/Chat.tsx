@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/Input";
 import { useRoomIdStore } from "@/store/useRoomIdStore";
 import { Message } from "@/types/Message";
 import { PrimaryButton } from "@/components/ui/Button";
+import { Send } from "lucide-react";
 
 function Chat() {
   const { username } = useUsernameStore();
@@ -13,18 +14,31 @@ function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+  const messageSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    messageSoundRef.current = new Audio("/sounds/messageAudio.mp3");
+  }, []);
 
   useEffect(() => {
     socket.connect();
 
     socket.on("recieveMessage", (message) => {
       setMessages((prev) => [...prev, message]);
+
+      if (message.sender !== username) {
+        messageSoundRef.current?.play().catch(() => {});
+      }
+
+      messageSoundRef.current?.play().catch(() => {
+        // autoplay blocked (browser policy)
+      });
     });
 
     return () => {
       socket.off("recieveMessage");
     };
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -62,7 +76,9 @@ function Chat() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
         />
-        <PrimaryButton className="sm:hidden">Send</PrimaryButton>
+        <PrimaryButton icon={<Send />} className="sm:hidden">
+          Send
+        </PrimaryButton>
       </div>
     </div>
   );

@@ -1,29 +1,56 @@
-import { Dialog } from "@base-ui/react/dialog";
+import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
+import ClickSpark from "@/components/ui/ClickSpark";
+import { SparkColor } from "@/env";
+import { X } from "lucide-react";
 
-interface AppDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  title?: string;
+type SpringModalProps = {
   children: ReactNode;
-}
+  title?: string;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+};
 
-export function AppDialog({
-  open,
-  onOpenChange,
-  title,
+const SpringModal = ({
+  isOpen,
+  setIsOpen,
   children,
-}: AppDialogProps) {
+  title,
+}: SpringModalProps) => {
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 bg-black/50" />
-        <Dialog.Popup className="fixed left-1/2 top-1/2 w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-background p-6 shadow-lg">
-          <Dialog.Title className="text-lg font-semibold">{title}</Dialog.Title>
-          <div className="mt-4">{children}</div>
-          <Dialog.Close className="absolute right-4 top-4">✕</Dialog.Close>
-        </Dialog.Popup>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setIsOpen(false)}
+          className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: "12.5deg" }}
+            animate={{ scale: 1, rotate: "0deg" }}
+            exit={{ scale: 0, rotate: "0deg" }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-background text-text p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+          >
+            <h1
+              className={`text-xl font-semibold fixed ${title ? "" : "hidden"}`}
+            >
+              {title}
+            </h1>
+            <ClickSpark sparkColor={SparkColor}>
+              <div style={title ? { marginTop: "3rem" } : {}}>{children}</div>
+            </ClickSpark>
+            <X
+              className="absolute top-8 right-8"
+              onClick={() => setIsOpen(false)}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
-}
+};
+
+export default SpringModal;

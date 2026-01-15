@@ -15,8 +15,8 @@ import { socket } from "@/lib/socket";
 import { usePlayerStore } from "@/store/usePlayerStore";
 import { List, MessageCircleMore } from "lucide-react";
 import PlayersList from "@/components/game/PlayersList";
-import { AppDialog } from "@/components/ui/Dialog";
 import Chat from "@/components/Chat";
+import SpringModal from "@/components/ui/Dialog";
 
 const GameBoard = () => {
   const gamePhase = useGamePhase();
@@ -28,7 +28,6 @@ const GameBoard = () => {
   const mySocketId = usePlayerStore((state) => state.uuid);
   const hostSocketId = useHostSocketId();
   const amIHost = mySocketId === hostSocketId;
-
   const [openPlayersList, setOpenPlayersList] = useState<boolean>(false);
   const [openChat, setOpenChat] = useState<boolean>(false);
 
@@ -37,16 +36,15 @@ const GameBoard = () => {
       <div className="h-1/8 w-full sm:p-4 flex justify-between items-center">
         {amIHost && (
           <PrimaryButton
+            icon={<Play />}
             onClick={() => socket.emit("startGame", { roomId })}
-            className="aspect-square"
           >
-            <Play />
+            Play
           </PrimaryButton>
         )}
         {gamePhase === "playing" && (
           <p className="flex p-2 rounded-full items-center justify-center bg-blue-500">
             <Timer size={32} />
-            00:20
           </p>
         )}
         {gamePhase !== "playing" && (
@@ -107,12 +105,12 @@ const GameBoard = () => {
         >
           <MessageCircleMore size={32} />
         </div>
-        <AppDialog onOpenChange={setOpenPlayersList} open={openPlayersList}>
+        <SpringModal isOpen={openPlayersList} setIsOpen={setOpenPlayersList}>
           <PlayersList />
-        </AppDialog>
-        <AppDialog title="Messages" onOpenChange={setOpenChat} open={openChat}>
+        </SpringModal>
+        <SpringModal title="Messages" setIsOpen={setOpenChat} isOpen={openChat}>
           <Chat />
-        </AppDialog>
+        </SpringModal>
       </div>
     </div>
   );

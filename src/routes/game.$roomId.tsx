@@ -39,8 +39,17 @@ function RouteComponent() {
 
     setRoomId(roomId);
 
+    const handleCardPlayed = () => {
+      const audio = new Audio("/sounds/playCard.mp3");
+      audio.volume = 0.6;
+      audio.play().catch(() => {});
+    };
+
+    socket.on("cardPlayed", handleCardPlayed);
+
     return () => {
       socket.off("errors", handleError);
+      socket.off("cardPlayed", handleCardPlayed);
     };
   }, [roomId, setRoomId, username]);
 

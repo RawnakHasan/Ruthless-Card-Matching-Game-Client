@@ -4,6 +4,8 @@ import "./index.css";
 
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
+import ClickSpark from "@/components/ui/ClickSpark";
+import { SparkColor } from "@/env";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -28,7 +30,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <div className="isolate antialiased">
-      <RouterProvider router={router} />
+      <ClickSpark sparkColor={SparkColor}>
+        <RouterProvider router={router} />
+      </ClickSpark>
     </div>
   );
 }
