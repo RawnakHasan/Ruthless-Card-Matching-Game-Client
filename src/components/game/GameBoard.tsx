@@ -1,4 +1,4 @@
-import { CopyCheck, Play, Timer } from "lucide-react";
+import { CopyCheck, Play } from "lucide-react";
 import {
   useCurrentTurn,
   useGamePhase,
@@ -33,19 +33,21 @@ const GameBoard = () => {
 
   return (
     <div className="h-full w-full flex flex-col items-center sm:gap-0 gap-3">
-      <div className="h-1/8 w-full sm:p-4 flex justify-between items-center">
-        {amIHost && (
+      <div
+        className="h-1/8 w-full sm:p-4 flex items-center"
+        style={
+          gamePhase === "waiting"
+            ? { justifyContent: "space-between" }
+            : { justifyContent: "end" }
+        }
+      >
+        {amIHost && gamePhase === "waiting" && (
           <PrimaryButton
             icon={<Play />}
             onClick={() => socket.emit("startGame", { roomId })}
           >
             Play
           </PrimaryButton>
-        )}
-        {gamePhase === "playing" && (
-          <p className="flex p-2 rounded-full items-center justify-center bg-blue-500">
-            <Timer size={32} />
-          </p>
         )}
         {gamePhase !== "playing" && (
           <span
