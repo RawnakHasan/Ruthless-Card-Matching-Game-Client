@@ -68,7 +68,7 @@ function Chat() {
 
   return (
     <div className="h-1/2 flex flex-col gap-4 justify-between min-h-0">
-      <div className="flex flex-col gap-0.5 overflow-y-auto min-h-0">
+      <div className="flex flex-col gap-0.5 overflow-y-auto min-h-0 max-h-96">
         {messages.map((msg) => (
           <div className="border-b min-w-0" key={msg.timestamp}>
             <span className="font-semibold">{msg.sender}</span>:{" "}
