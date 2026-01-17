@@ -25,7 +25,7 @@ const DiscardPile = () => {
   const topCard = discardPile[discardPile.length - 1];
 
   return (
-    <div className="flex items-center justify-center aspect-square size-40 relative">
+    <div className="relative z-10 flex items-center justify-center aspect-square size-40">
       {discardPile.length === 0 ? (
         <span className="text-center">Game Didn't Start yet</span>
       ) : (

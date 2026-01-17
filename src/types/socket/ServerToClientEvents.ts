@@ -1,5 +1,6 @@
 import type { ClientGame, Player } from "@/types/game";
 import type { Message } from "@/types/Message";
+import { LeaderboardEntry } from "@/types/game/LeaderBoard";
 
 export interface ServerToClientEvents {
   gameCreated: ({ roomId }: { roomId: string }) => void;
@@ -12,4 +13,6 @@ export interface ServerToClientEvents {
   errors: (errorMessage: string) => void;
   gameEnded: (message: string) => void;
   cardPlayed: () => void;
+  gotCard: ({ count }: { count: number }) => void;
+  leaderBoard: (leaderBoard: LeaderboardEntry[]) => void;
 }

@@ -39,5 +39,6 @@ export interface ClientToServerEvents {
   }: {
     roomId: string;
     targetPlayerId: number;
+    card: Card;
   }) => void;
 }

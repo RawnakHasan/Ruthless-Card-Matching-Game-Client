@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Gamepad2 } from "lucide-react";
+import { unlockAudio } from "@/helpers/unlockAudio";
 
 const roomIdForm = z.object({
   roomId: z
@@ -55,10 +56,12 @@ const GameCreation = () => {
     const roomId = data.roomId;
     socket.emit("joinGame", { username, roomId });
     form.reset();
+    unlockAudio();
   };
 
   const handleCreateGame = () => {
     socket.emit("createGame", { username });
+    unlockAudio();
   };
 
   return (

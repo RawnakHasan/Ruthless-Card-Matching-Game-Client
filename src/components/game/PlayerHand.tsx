@@ -10,11 +10,11 @@ import {
 } from "@/types";
 import ColorPicker from "@/components/game/ColorPicker";
 import PlayerSelector from "@/components/game/PlayerSelector";
+import { toast } from "sonner";
 
 const PlayerHand = () => {
   const { roomId } = useRoomIdStore();
   const myHand = usePlayerStore((state) => state.hand);
-
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [selectedWildCard, setSelectedWildCard] = useState<WildCard | null>(
     null
@@ -57,12 +57,18 @@ const PlayerHand = () => {
 
   const handlePlayerSelection = (player: ClientPlayer) => {
     if (!player) return;
+    if (player.cardCount < 2) {
+      toast.error("Error", {
+        description: "You cannot Play Normal 7 Card in the End",
+      });
+      return;
+    }
 
     const card = selectedSevenCard;
 
     if (!card) return;
 
-    socket.emit("swapHands", { roomId, targetPlayerId: player.id });
+    socket.emit("swapHands", { roomId, targetPlayerId: player.id, card });
     socket.emit("playCard", { card, roomId });
 
     setShowPlayerSelector(false);
@@ -96,18 +102,18 @@ const PlayerHand = () => {
         </div>
       </div>
 
-      {showColorPicker && (
-        <ColorPicker
-          onColorSelect={handleColorSelect}
-          onCancel={handleCancel}
-        />
-      )}
-      {showPlayerSelector && (
-        <PlayerSelector
-          handlePlayerSelection={handlePlayerSelection}
-          handleCancel={handleCancel}
-        />
-      )}
+      <ColorPicker
+        isOpen={showColorPicker}
+        setIsOpen={setShowColorPicker}
+        onColorSelect={handleColorSelect}
+        onCancel={handleCancel}
+      />
+      <PlayerSelector
+        isOpen={showPlayerSelector}
+        setIsOpen={setShowPlayerSelector}
+        handlePlayerSelection={handlePlayerSelection}
+        handleCancel={handleCancel}
+      />
     </>
   );
 };

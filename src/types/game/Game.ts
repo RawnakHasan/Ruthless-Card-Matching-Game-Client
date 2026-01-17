@@ -12,6 +12,8 @@ export type Game = {
   hostSocketId: string;
   drawCount: number;
   playerTurn: number;
+  finishCount: number;
+  eliminationCount: number;
 };
 
 export type ClientGame = {

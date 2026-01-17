@@ -17,12 +17,14 @@ import { List, MessageCircleMore } from "lucide-react";
 import PlayersList from "@/components/game/PlayersList";
 import Chat from "@/components/Chat";
 import SpringModal from "@/components/ui/Dialog";
+import { useGameStore } from "@/store/useGameStore";
 
 const GameBoard = () => {
   const gamePhase = useGamePhase();
   const players = usePlayers();
   const currentTurn = useCurrentTurn();
   const currentPlayer = players.find((player) => player.id === currentTurn);
+  const drawCount = useGameStore((state) => state.drawCount);
   const { roomId } = useRoomIdStore();
   const [copied, setCopied] = useState(false);
   const mySocketId = usePlayerStore((state) => state.uuid);
@@ -41,7 +43,7 @@ const GameBoard = () => {
             : { justifyContent: "end" }
         }
       >
-        {amIHost && gamePhase === "waiting" && (
+        {amIHost && gamePhase !== "playing" && (
           <PrimaryButton
             icon={<Play />}
             onClick={() => socket.emit("startGame", { roomId })}
@@ -76,14 +78,17 @@ const GameBoard = () => {
       <div className="sm:h-4/8 min-h-60 w-full sm:p-2 flex items-center justify-center relative">
         <DiscardPile />
         {gamePhase === "playing" && (
-          <img
-            onClick={() =>
-              socket.emit("getCard", { roomId, socketId: mySocketId })
-            }
-            className="absolute top-4 right-4 w-16 active:scale-95 transition cursor-pointer hover:scale-105"
-            src="/Cards/Back.svg"
-            alt="Card Back"
-          />
+          <div className="absolute top-4 right-4 flex flex-col items-center gap-2">
+            <img
+              onClick={() =>
+                socket.emit("getCard", { roomId, socketId: mySocketId })
+              }
+              className="active:scale-95 w-16 transition cursor-pointer hover:scale-105"
+              src="/Cards/Back.svg"
+              alt="Card Back"
+            />
+            <p className="">Draw Count: {drawCount}</p>
+          </div>
         )}
       </div>
       <div className="border w-full" />
