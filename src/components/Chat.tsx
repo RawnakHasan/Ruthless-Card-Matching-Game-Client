@@ -76,7 +76,11 @@ function Chat() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
         />
-        <PrimaryButton icon={<Send />} className="sm:hidden">
+        <PrimaryButton
+          onClick={sendMessage}
+          icon={<Send />}
+          className="sm:hidden"
+        >
           Send
         </PrimaryButton>
       </div>
