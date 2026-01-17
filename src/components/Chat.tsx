@@ -3,15 +3,17 @@ import { socket } from "@/lib/socket";
 import { useUsernameStore } from "@/store/useUsernameStore";
 import { Input } from "@/components/ui/Input";
 import { useRoomIdStore } from "@/store/useRoomIdStore";
-import { Message } from "@/types/Message";
 import { PrimaryButton } from "@/components/ui/Button";
 import { Send } from "lucide-react";
+import { useMessageStore } from "@/store/useMessageStore";
+import { Message } from "@/types/Message";
 
 function Chat() {
   const { username } = useUsernameStore();
   const { roomId } = useRoomIdStore();
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const { messages, setMessages } = useMessageStore();
+
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const messageSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -24,7 +26,7 @@ function Chat() {
     socket.connect();
 
     socket.on("recieveMessage", (message) => {
-      setMessages((prev) => [...prev, message]);
+      setMessages(message);
 
       if (message.sender !== username) {
         messageSoundRef.current?.play().catch(() => {});
@@ -38,7 +40,7 @@ function Chat() {
     return () => {
       socket.off("recieveMessage");
     };
-  }, [username]);
+  }, [username, setMessages]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -46,6 +48,14 @@ function Chat() {
 
   const sendMessage = () => {
     if (!input.trim()) return;
+
+    const newMessage: Message = {
+      message: input,
+      sender: username,
+      timestamp: Date.now(),
+    };
+
+    setMessages(newMessage);
 
     socket.emit("sendMessage", {
       roomId,
