@@ -68,17 +68,19 @@ function Chat() {
 
   return (
     <div className="h-1/2 flex flex-col gap-4 justify-between min-h-0">
-      <div className="flex flex-col gap-0.5 overflow-y-auto min-h-0 max-h-96">
+      <div className="flex flex-col gap-0.5 overflow-y-auto min-h-0 max-h-96 max-w-60">
         {messages.map((msg) => (
           <div className="border-b min-w-0" key={msg.timestamp}>
             <span className="font-semibold">{msg.sender}</span>:{" "}
-            <span className="break-all">{msg.message}</span>
+            <span className="wrap-break-word whitespace-pre-wrap">
+              {msg.message}
+            </span>
           </div>
         ))}
         <div ref={bottomRef} />
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 h-14">
         <Input
           className="w-full"
           value={input}
@@ -86,12 +88,8 @@ function Chat() {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Type a message..."
         />
-        <PrimaryButton
-          onClick={sendMessage}
-          icon={<Send />}
-          className="sm:hidden"
-        >
-          Send
+        <PrimaryButton className="inline-block sm:hidden">
+          <Send />
         </PrimaryButton>
       </div>
     </div>

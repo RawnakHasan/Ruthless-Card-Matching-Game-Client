@@ -34,7 +34,7 @@ const DiscardPile = () => {
             <img
               key={index}
               src={card.image}
-              className="absolute inset-0"
+              className="absolute inset-0 size-32 sm:size-40"
               style={{
                 transform: `rotate(${rotationFromCard(card)}deg)`,
                 zIndex: index,

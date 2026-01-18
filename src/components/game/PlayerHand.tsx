@@ -17,7 +17,7 @@ const PlayerHand = () => {
   const myHand = usePlayerStore((state) => state.hand);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [selectedWildCard, setSelectedWildCard] = useState<WildCard | null>(
-    null
+    null,
   );
   const [showPlayerSelector, setShowPlayerSelector] = useState(false);
   const [selectedSevenCard, setSelectedSevenCard] = useState<Card | null>(null);
@@ -83,25 +83,22 @@ const PlayerHand = () => {
   };
 
   return (
-    <>
-      <div
-        className="w-full flex sm:items-center sm:justify-center overflow-x-auto overflow-y-visible py-4"
-        style={myHand.length <= 9 ? { justifyContent: "center" } : {}}
-      >
-        <div className="grid grid-rows-3 grid-flow-col auto-cols-max gap-4 overflow-visible">
-          {myHand.map((card) => (
-            <img
-              key={card.id}
-              src={card.image}
-              alt={card.id}
-              onClick={() => handleCardClick(card)}
-              draggable={false}
-              className="w-16 cursor-pointer transition hover:scale-110 hover:brightness-110 active:scale-95"
-            />
-          ))}
-        </div>
+    <div
+      className="w-full flex sm:items-center sm:justify-center overflow-x-auto overflow-y-visible py-6"
+      style={myHand.length <= 9 ? { justifyContent: "center" } : {}}
+    >
+      <div className="grid grid-rows-3 grid-flow-col auto-cols-max gap-4 overflow-visible">
+        {myHand.map((card) => (
+          <img
+            key={card.id}
+            src={card.image}
+            alt={card.id}
+            onClick={() => handleCardClick(card)}
+            draggable={false}
+            className="w-16 cursor-pointer transition hover:scale-110 hover:brightness-110 active:scale-95"
+          />
+        ))}
       </div>
-
       <ColorPicker
         isOpen={showColorPicker}
         setIsOpen={setShowColorPicker}
@@ -114,7 +111,7 @@ const PlayerHand = () => {
         handlePlayerSelection={handlePlayerSelection}
         handleCancel={handleCancel}
       />
-    </>
+    </div>
   );
 };
 

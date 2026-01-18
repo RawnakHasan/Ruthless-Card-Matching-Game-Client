@@ -53,7 +53,7 @@ const GameBoard = () => {
         )}
         {gamePhase !== "playing" && (
           <span
-            className="px-4 py-2 bg-secondary rounded-xl text-xl cursor-pointer select-none active:scale-95 transition"
+            className="hidden sm:inline-flex px-4 py-2 bg-secondary rounded-xl text-xl cursor-pointer select-none active:scale-95 transition"
             onClick={async () => {
               await navigator.clipboard.writeText(roomId);
               setCopied(true);
@@ -78,7 +78,7 @@ const GameBoard = () => {
       <div className="sm:h-4/8 min-h-60 w-full sm:p-2 flex items-center justify-center relative">
         <DiscardPile />
         {gamePhase === "playing" && (
-          <div className="absolute top-4 right-4 flex flex-col items-center gap-2">
+          <div className="sm:absolute sm:top-4 sm:right-4 flex flex-col items-center gap-2">
             <img
               onClick={() =>
                 socket.emit("getCard", { roomId, socketId: mySocketId })
@@ -90,11 +90,29 @@ const GameBoard = () => {
             <p className="">Draw Count: {drawCount}</p>
           </div>
         )}
+        {gamePhase !== "playing" && (
+          <span
+            className="inline-flex sm:hidden px-4 py-2 bg-secondary rounded-xl text-xl cursor-pointer select-none active:scale-95 transition absolute top-4"
+            onClick={async () => {
+              await navigator.clipboard.writeText(roomId);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1200);
+            }}
+          >
+            {copied ? (
+              <p className="flex items-center justify-center gap-2">
+                <CopyCheck />
+                Copied!
+              </p>
+            ) : (
+              roomId
+            )}
+          </span>
+        )}
       </div>
       <div className="border w-full" />
-      <div className="h-3/8 w-full pb-2 sm:p-2 flex items-center justify-center border-b-2">
+      <div className="h-3/8 min-h-60 w-full pb-2 sm:p-2 flex items-center justify-center border-b-2">
         {gamePhase === "waiting" ? "No Cards has been Dealt" : <PlayerHand />}
-        {gamePhase === "finished" && "Show Leaderboard"}
       </div>
       <div className="flex items-center justify-evenly w-full">
         <div
@@ -102,9 +120,6 @@ const GameBoard = () => {
           className="active:scale-95 transition sm:hidden bg-primary bottom-8 right-8 flex items-center justify-center aspect-square rounded-full size-16"
         >
           <List size={32} />
-        </div>
-        <div className="active:scale-95 transition sm:hidden bg-primary size-16 flex items-center justify-center text-xl p-2 font-semibold aspect-square rounded-full">
-          UNO
         </div>
         <div
           onClick={() => setOpenChat(true)}
