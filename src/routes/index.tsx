@@ -6,7 +6,7 @@ import GameCreation from "@/components/GameCreation";
 import { serverUrl } from "@/env";
 import GradientText from "@/components/ui/GradientText";
 import { PrimaryButton } from "@/components/ui/Button";
-import { FileText } from "lucide-react";
+import { FileText, Grip } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -32,6 +32,9 @@ function RouteComponent() {
       )}
       <Link to="/docs" className="absolute bottom-8 right-8">
         <PrimaryButton icon={<FileText />}>Docs</PrimaryButton>
+      </Link>
+      <Link to="/deck" className="absolute bottom-26 right-8">
+        <PrimaryButton icon={<Grip />}>Deck</PrimaryButton>
       </Link>
     </div>
   );

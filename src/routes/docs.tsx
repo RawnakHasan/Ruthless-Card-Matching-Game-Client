@@ -25,6 +25,7 @@ function RouteComponent() {
         <HowToPlay />
         <CardRules />
       </div>
+      <p className="text-9xl text-red-500 text-center font-semibold">Work in Progress</p>
     </div>
   );
 }
