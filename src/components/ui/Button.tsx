@@ -49,7 +49,7 @@ export function PrimaryButton({
       {...props}
     >
       <p className="flex gap-2 items-center justify-ceter">
-        {icon && <span className="sm:hidden">{icon}</span>}
+        {icon && <span className="">{icon}</span>}
         {children}
       </p>
     </button>
