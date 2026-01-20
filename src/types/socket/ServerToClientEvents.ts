@@ -15,4 +15,5 @@ export interface ServerToClientEvents {
   cardPlayed: () => void;
   gotCard: ({ count }: { count: number }) => void;
   leaderBoard: (leaderBoard: LeaderboardEntry[]) => void;
+  gameReset: ({ message }: { message: string }) => void;
 }

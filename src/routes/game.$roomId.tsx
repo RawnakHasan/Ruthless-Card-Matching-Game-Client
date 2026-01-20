@@ -21,7 +21,7 @@ const playCardTwoTimes = new Audio("/sounds/playCardTwoTimes.mp3");
 const playCardThreeTimes = new Audio("/sounds/playCardThreeTimes.mp3");
 const playCardFourTimes = new Audio("/sounds/playCardFourTimes.mp3");
 const playCardMoreThanFourTimes = new Audio(
-  "/sounds/playCardMoreThanFourTimes.mp3"
+  "/sounds/playCardMoreThanFourTimes.mp3",
 );
 const Volume = 0.6;
 
@@ -37,7 +37,7 @@ function RouteComponent() {
 
   const [showLeaderBoard, setShowLeaderBoard] = useState(false);
   const [leaderBoardState, setLeaderBoardState] = useState<LeaderboardEntry[]>(
-    []
+    [],
   );
 
   useEffect(() => {
@@ -99,12 +99,18 @@ function RouteComponent() {
       }
     };
 
+    const handleGameReset = ({ message }: { message: string }) => {
+      setShowLeaderBoard(false);
+      toast.success("Game Reset", { description: message });
+    };
+
     socket.on("cardPlayed", handleCardPlayed);
     socket.on("roomExistence", handleRoomExistence);
     socket.on("gameUpdate", handleSetGameState);
     socket.on("userDataUpdate", handleSetPlayerState);
     socket.on("gotCard", handleGotCard);
     socket.on("leaderBoard", handleLeaderBoardState);
+    socket.on("gameReset", handleGameReset);
 
     return () => {
       socket.off("errors", handleError);
@@ -112,6 +118,7 @@ function RouteComponent() {
       socket.off("roomExistence", handleRoomExistence);
       socket.off("gameUpdate", handleSetGameState);
       socket.off("userDataUpdate", handleSetPlayerState);
+      socket.off("gameReset", handleGameReset);
     };
   }, [roomId, setRoomId, username, navigate, setGameState, setPlayer]);
 

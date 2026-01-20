@@ -41,4 +41,6 @@ export interface ClientToServerEvents {
     targetPlayerId: number;
     card: Card;
   }) => void;
+
+  playAgain: ({ roomId }: { roomId: string }) => void;
 }
