@@ -41,6 +41,11 @@ function RouteComponent() {
   );
 
   useEffect(() => {
+    if (!username) {
+      navigate({ to: "/" });
+      return;
+    }
+
     if (!socket.connected) {
       socket.connect();
       socket.emit("joinGame", { username, roomId });
