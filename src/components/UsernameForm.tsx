@@ -37,7 +37,7 @@ export function UsernameForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex min-w-md flex-col gap-2 p-4 border-2 border-text rounded-lg"
+      className="flex min-w-40 flex-col gap-2 p-4 border-2 border-text rounded-lg"
     >
       <label htmlFor="username" className="text-xl font-semibold">
         Username
