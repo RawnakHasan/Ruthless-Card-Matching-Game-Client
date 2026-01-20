@@ -6,6 +6,7 @@ import { useUsernameStore } from "@/store/useUsernameStore";
 import { PrimaryButton } from "@/components/ui/Button";
 import { socket } from "@/lib/socket";
 import { useRoomIdStore } from "@/store/useRoomIdStore";
+import { usePlayerStore } from "@/store/usePlayerStore";
 // import { usePlayerStore } from "@/store/usePlayerStore";
 
 type LeaderBoardProps = {
@@ -37,8 +38,7 @@ const LeaderBoardModal = ({
   // const mySocketId = usePlayerStore((state) => state.uuid);
 
   // Check if current user is host
-  const isHost =
-    leaderBoard.length > 0 && leaderBoard[0]?.username === username;
+  const isHost = usePlayerStore((state) => state.host);
 
   const handlePlayAgain = () => {
     socket.emit("playAgain", { roomId });
